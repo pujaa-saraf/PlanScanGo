@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.ng-select{
+    margin-bottom: 2rem;
+}
+
+.ng-select.custom .ng-select-container {
+    outline: none;
+    border: 1.5px solid #8C7D6B;
+    border-radius: 0.375rem;
+    margin-top: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    width: 100%;
+}
+
+.ng-select.custom .ng-dropdown-panel{
+    min-height: 3.5rem;
+    border-radius: 0.375rem; 
+    background-color: #8C7D6B; /* Example background color */
+    color: white;
+}
+
+.ng-option{
+    padding: 0.5rem;
+    border-bottom: 1px solid white;
+}
+
+.ng-option-marked{
+    background-color: white;
+    color: #8C7D6B;
+}
+

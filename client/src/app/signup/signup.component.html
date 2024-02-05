@@ -1,0 +1,80 @@
+<div class="m-auto w-[90%] grid grid-cols-1 md:grid-cols-7 md:gap-20 items-center h-[100vh]">
+    <div class="col-span-1 md:col-span-4 justify-center">
+      <h1 class="text-xl md:text-3xl font-semibold text-center mb-4 text-[#8C7D6B]">
+        Get Started with PlanScanGo!
+      </h1>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()"
+        class="flex flex-col items-center text-sm md:text-md mt-8 md:mt-10">
+        <div class="w-[80%] flex flex-col justify-center">
+
+          <label for="username" class="font-semibold text-[#8C7D6B]">
+            Username
+          </label>
+          <div class="mb-8">
+            <input type="text" required
+            class="border-[1.5px] border-[#8C7D6B] rounded-md mt-1 px-2 py-3 w-[100%] " placeholder="Username"
+            formControlName="username" (input)="onInput()"/>
+            <div *ngIf="submitted && signupForm.controls.username.status==='INVALID'" class="text-red-500">
+              <div *ngIf="signupForm.controls.username.errors?.['required']">Username is required.</div>
+            </div>
+          </div>
+
+          <label for="email" class="font-semibold text-[#8C7D6B]">
+            Email
+          </label>
+          <div class="mb-8">
+            <input type="email" required
+            class="border-[1.5px] border-[#8C7D6B] rounded-md mt-1 px-2 py-3 w-[100%] " placeholder="Email"
+            formControlName="email" (input)="onInput()"/>
+            <div *ngIf="submitted && signupForm.controls.email.status==='INVALID'" class="text-red-500">
+              <div *ngIf="signupForm.controls.email.errors?.['required']">Email is required.</div>
+              <div *ngIf="signupForm.controls.email.errors?.['pattern']">
+                Please enter a valid email.
+              </div>
+            </div>
+          </div>
+          
+          <label for="password" class="font-semibold text-[#8C7D6B]">
+            Password
+          </label>
+          <div class="mb-8">
+            <input type="password" required class="border-[1.5px] border-[#8C7D6B] rounded-md mt-1 px-2 py-3 w-[100%]"
+            placeholder="Password" formControlName="password" (input)="onInput()" />
+            <div *ngIf="submitted && (signupForm.controls.password.status==='INVALID' || !password_matching)" class="text-red-500">
+              <div *ngIf="signupForm.controls.password.errors?.['required']">Password is required.</div>
+              <div *ngIf="signupForm.controls.password.errors?.['minlength']">
+                Password must be of length >= 6.
+              </div>
+              <div *ngIf="!password_matching && !signupForm.controls.password.errors">Passwords not matching.</div>
+            </div>
+          </div>
+
+          <label for="password" class="font-semibold text-[#8C7D6B]">
+            Confirm Password
+          </label>
+          <div class="mb-8">
+            <input type="password" required class="border-[1.5px] border-[#8C7D6B] rounded-md mt-1 px-2 py-3 w-[100%]"
+            placeholder="Password" formControlName="confirm_password" (input)="onInput()" />
+            <div *ngIf="submitted && (signupForm.controls.confirm_password.status==='INVALID' || !password_matching)" class="text-red-500">
+              <div *ngIf="signupForm.controls.confirm_password.errors?.['required']">Password is required.</div>
+              <div *ngIf="signupForm.controls.confirm_password.errors?.['minlength']">
+                Password must be of length >= 6.
+              </div>
+              <div *ngIf="!password_matching && !signupForm.controls.confirm_password.errors">Passwords not matching.</div>
+            </div>
+          </div>
+        </div>
+        <button type="submit"
+          class="cursor-pointer w-[80%] py-3 px-7 text-center text-md font-semibold hover:opacity-75 bg-[#D96942] text-white rounded-md">Signup</button>
+        <p class="mt-3 text-lg mt-10 text-[#8C7D6B]">
+            Already have an account?
+          <button class="cursor-pointer text-[#D96942] font-bold" type="button" routerLink="/login">
+            Login
+          </button>
+        </p>
+      </form>
+    </div>
+    <div class="md:col-span-3 hidden md:block">
+      <img src="../../assets/img/signup.svg" alt="login" class="w-[90%]" />
+    </div>
+  </div>

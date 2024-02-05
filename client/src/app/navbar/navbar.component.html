@@ -1,0 +1,26 @@
+<nav class="fixed w-full bg-[#FCF7F0] px-4 py-3 sm:flex sm:items-center sm:justify-between">
+    <div class="flex justify-between sm:block">
+        <a routerLink="/" class="block text-2xl font-bold text-[#D96942]">
+            PlanScanGo!
+        </a>
+        <button class="block bg-transparent sm:hidden">
+            <input class="invisible appearance-none" type="checkbox" id="toggle" />
+
+            <label for="toggle">
+                <i id="menu-icon" class="fa-solid fa-bars bx bx-menu cursor-pointer text-2xl text-[#8C7D6B]"></i>
+                <i id="close-icon" class="fa-solid fa-xmark bx bx-x hidden cursor-pointer text-2xl text-[#8C7D6B]"></i>
+            </label>
+        </button>
+    </div>
+    <div #linksDiv id="navigation"
+        class="mt-2 flex h-0 flex-col items-left gap-4 overflow-hidden text-[#8C7D6B] transition-all duration-500 ease-in-out sm:h-auto sm:flex-row sm:items-center sm:gap-8 sm:overflow-auto">
+        <a routerLink="/create-itinerary" routerLinkActive="nav-active" ariaCurrentWhenActive="page">Create</a>
+        <a routerLink="/explore-itinerary" routerLinkActive="nav-active" ariaCurrentWhenActive="page">Explore</a>
+        <a *ngIf="!user" routerLink="/login" routerLinkActive="nav-active" ariaCurrentWhenActive="page">Login</a>
+        <a *ngIf="!user" routerLink="/signup" routerLinkActive="nav-active" ariaCurrentWhenActive="page">Signup</a>
+        <a routerLink="/get-suggestions" class="text-white px-4 py-2 bg-[#D96942] rounded-md hover:opacity-80">
+            <i class="fa-solid fa-rocket mr-2"></i>Suggestions
+        </a>
+        <a *ngIf="user" routerLink="/my-itineraries" routerLinkActive="nav-active" ariaCurrentWhenActive="page" class="hover:opacity-80"><img class="h-10" src="../../assets/img/profuser 2.svg"/></a>
+    </div>
+</nav>  

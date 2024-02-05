@@ -1,0 +1,57 @@
+<div class="m-auto items-center pb-10">
+    <h1 class="text-2xl md:text-3xl pt-28 pb-10 font-semibold text-center w-[100%] bg-[#FCF7F0] text-[#8C7D6B]">
+        Edit your {{itinerary?.location}} Itinerary!
+    </h1>
+    <div class="w-[80%] md:w-[60%] grid items-center ml-auto mr-auto">
+        <form [formGroup]="itineraryForm" (ngSubmit)="onSubmit()" class="pt-10 md:pt-12 flex flex-col text-md md:text-lg">
+
+            <div formArrayName="days">
+                <div *ngFor="let dayControl of dayControls; let dayIndex = index" [formGroupName]="dayIndex"
+                    class="mb-10 flex flex-col">
+                    <div class="flex flex-col gap-2 md:flex-row justify-between md:items-center">
+                        <label [for]="'day' + dayIndex" class="font-semibold text-[#8C7D6B]">Day {{ dayIndex + 1
+                            }}:</label>
+                        <div class="flex flex-row gap-2">
+                            <button type="button"
+                                [disabled]="!getPointsControl(dayIndex).at(getPointsControl(dayIndex).length-1).valid || getPointsControl(dayIndex).at(getPointsControl(dayIndex).length-1).value===''"
+                                [ngClass]="{ 'disabled-button': !getPointsControl(dayIndex).at(getPointsControl(dayIndex).length-1).valid || getPointsControl(dayIndex).at(getPointsControl(dayIndex).length-1).value==='' }"
+                                (click)="addPoint(dayIndex)"
+                                class="text-sm text-white font-semibold px-6 py-2 bg-[#8C7D6B] rounded-md hover:opacity-80">Add
+                                Activity</button>
+                            <button [disabled]="dayControls.length === 1"
+                                [ngClass]="{ 'disabled-button': dayControls.length === 1 }" type="button"
+                                (click)="deleteDay(dayIndex)"
+                                class="text-sm text-white font-semibold px-6 py-2 bg-red-500 rounded-md hover:opacity-80">Delete</button>
+                        </div>
+                    </div>
+                    <div formArrayName="points" class="mt-2">
+                        <div *ngFor="let pointControl of getPointsControl(dayIndex).controls; let pointIndex = index"
+                            class="flex flex-row justify-between border-[1.5px] border-[#8C7D6B] rounded-md mt-3">
+                            <textarea [id]="'point' + dayIndex + pointIndex" type="text"
+                                [formControl]="getPointControl(dayIndex, pointIndex)"
+                                class="text-[#8C7D6B] font-light resize-none rounded-md focus:outline-none px-2 py-3 w-[100%] " ></textarea>
+                            <button [disabled]="getPointsControl(dayIndex).controls.length===1"
+                                [ngClass]="{ 'disabled-button': getPointsControl(dayIndex).controls.length===1 }"
+                                type="button" (click)="deletePoint(dayIndex, pointIndex)"
+                                class="bg-red-500 bg-opacity-20 text-red-500 px-4"><i
+                                    class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col gap-2 md:flex-row justify-between">
+                <button type="button" (click)="addDay()"
+                    [disabled]="!getPointsControl(dayControls.length-1).at(getPointsControl(dayControls.length-1).length-1).valid && getPointsControl(dayControls.length-1).at(getPointsControl(dayControls.length-1).length-1).value===''"
+                    [ngClass]="{ 'disabled-button': !getPointsControl(dayControls.length-1).at(getPointsControl(dayControls.length-1).length-1).valid && getPointsControl(dayControls.length-1).at(getPointsControl(dayControls.length-1).length-1).value===''}"
+                    class="text-md text-white font-semibold px-6 py-2 bg-[#8C7D6B] rounded-md hover:opacity-80">Add
+                    Another Day</button>
+                <button type="submit"
+                    class="text-md text-white font-semibold px-6 py-2 bg-[#D96942] rounded-md hover:opacity-80">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<ngx-loading
+    [show]="loading"
+    [config]="{ fullScreenBackdrop: true }"
+></ngx-loading> 

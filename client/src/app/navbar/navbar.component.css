@@ -1,0 +1,16 @@
+.nav-active{
+    color: #D96942;
+}
+@media screen and (max-width: 639px) {
+    nav:has(#toggle:checked) #navigation {
+        height: var(--menu-height, 10rem);
+    }
+  
+    nav:has(#toggle:checked) #menu-icon {
+        display: none;
+    }
+  
+    nav:has(#toggle:checked) #close-icon {
+        display: inline-block;
+    }
+  }

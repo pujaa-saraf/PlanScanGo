@@ -1,0 +1,48 @@
+<div class="m-auto w-[90%] grid grid-cols-1 md:grid-cols-7 md:gap-20 items-center h-[100vh]">
+  <div class="col-span-1 md:col-span-4 justify-center">
+    <h1 class="text-xl md:text-3xl font-semibold text-center mb-4 text-[#8C7D6B]">
+      Hello, Welcome Back!
+    </h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"
+      class="flex flex-col items-center text-sm md:text-md mt-10 md:mt-16">
+      <div class="w-[80%] flex flex-col justify-center">
+        <label for="username" class="font-semibold text-[#8C7D6B]">
+          Username
+        </label>
+        <div class="mb-10">
+          <input type="username" required
+          class="border-[1.5px] border-[#8C7D6B] rounded-md mt-1 px-2 py-3 w-[100%] " placeholder="Username"
+          formControlName="username" (input)="onInput()"/>
+          <div *ngIf="submitted && loginForm.controls.username.status==='INVALID'" class="text-red-500">
+            <div *ngIf="loginForm.controls.username.errors?.['required']">Username is required.</div>
+          </div>
+        </div>
+        
+        <label for="password" class="font-semibold text-[#8C7D6B]">
+          Password
+        </label>
+        <div class="mb-10">
+          <input type="password" required class="border-[1.5px] border-[#8C7D6B] rounded-md mt-1 px-2 py-3 w-[100%]"
+          placeholder="Password" formControlName="password" (input)="onInput()" />
+          <div *ngIf="submitted && loginForm.controls.password.status==='INVALID'" class="text-red-500">
+            <div *ngIf="loginForm.controls.password.errors?.['required']">Password is required.</div>
+            <div *ngIf="loginForm.controls.password.errors?.['minlength']">
+              Password must be of length >= 6.
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit"
+        class="cursor-pointer w-[80%] py-3 px-7 text-center text-md font-semibold hover:opacity-75 bg-[#D96942] text-white rounded-md">Login</button>
+      <p class="mt-3 text-lg mt-10 text-[#8C7D6B]">
+        New to PlanScanGo?
+        <button class="cursor-pointer text-[#D96942] font-bold" type="button" routerLink="/signup">
+          Signup
+        </button>
+      </p>
+    </form>
+  </div>
+  <div class="md:col-span-3 hidden md:block">
+    <img src="../../assets/img/login.svg" alt="login" class="w-[90%]" />
+  </div>
+</div>

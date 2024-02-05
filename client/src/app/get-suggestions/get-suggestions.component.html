@@ -1,0 +1,51 @@
+<div class="m-auto items-center pb-10">
+    <h1 class="text-2xl md:text-3xl pt-28 pb-10 font-semibold text-center w-[100%] bg-[#FCF7F0] text-[#8C7D6B]">
+        Let AI create your Itinerary!
+    </h1>
+    <div class="w-[90%] m-auto">
+        <div class="flex flex-col md:items-end">
+            <div class="md:grid md:grid-cols-3 gap-10 lg:gap-20 justify-between items-center mt-10 w-[100%]">
+                <div class="flex flex-col">
+                    <label for="location" class="font-semibold text-[#8C7D6B]">Location :</label>
+                    <input class="p-2 border-2 border-[#8C7D6B] focus:outline-none rounded-md" name="location"
+                        placeholder="Location" [(ngModel)]="location" />
+                </div>
+                <div class="flex flex-col mt-4 md:mt-0">
+                    <label for="days" class="font-semibold text-[#8C7D6B]">Travel days :</label>
+                    <input class="p-2 border-2 border-[#8C7D6B] focus:outline-none rounded-md" name="days"
+                        placeholder="No of days" [(ngModel)]="days" />
+                </div>
+                <div class="flex flex-col mt-4 md:mt-0">
+                    <label for="style" class="font-semibold text-[#8C7D6B]">Travel style :</label>
+                    <input class="p-2 border-2 border-[#8C7D6B] focus:outline-none rounded-md" name="style"
+                        placeholder="Travel style" [(ngModel)]="style" />
+                </div>
+            </div>
+            <button class="text-md mt-4 text-white font-semibold w-40 py-2 bg-[#D96942] rounded-md hover:opacity-80"
+                (click)="doOpenAICall()"><i class="fa-solid fa-rocket mr-2"></i>Generate</button>
+        </div>
+
+        <div *ngIf="!daysArray.length" class="flex h-[90%] justify-center items-center mt-12">
+            <img src="../../assets/img/search.svg" class="h-64"/>
+        </div>
+
+        <div *ngFor="let day of daysArray; let dayIndex = index"
+            class="grid grid-cols-10 justify-center mt-8 border border-[#8C7D6B] rounded-md">
+            <p
+                class="rounded-l-md col-span-2 md:col-span-1 flex justify-center items-center pt-8 pb-8 bg-[#FCF7F0] font-semibold text-[#D96942]">
+                Day {{dayIndex+1}}</p>
+            <div class="flex flex-col col-span-8 md:col-span-9 gap-4 p-8">
+                <p *ngFor="let point of day" class="text-[#8C7D6B] flex flex-row gap-5">
+                    <i class="fa-solid fa-plane text-[#D96942] mt-1"></i> <span>{{point}}</span>
+                </p>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <button *ngIf="daysArray.length" (click)="onSave()"
+                class="text-md mt-4 text-white font-semibold w-40 py-2 bg-[#D96942] rounded-md hover:opacity-80">Save
+                Itinerary</button>
+        </div>
+    </div>
+</div>
+
+<ngx-loading [show]="loading" [config]="{ fullScreenBackdrop: true }"></ngx-loading>

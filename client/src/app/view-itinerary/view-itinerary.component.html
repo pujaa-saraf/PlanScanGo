@@ -1,0 +1,18 @@
+<div class="m-auto w-[90%] pt-24 pb-10">
+    <div class="flex flex-row justify-between mt-8">
+        <h1 class="text-2xl md:text-3xl font-semibold text-[#D96942]">
+            {{itinerary?.location}} Itinerary
+        </h1>
+        <button type="button"
+                class="text-md md:text-lg text-white font-semibold px-4 py-2 bg-[#8C7D6B] rounded-md hover:opacity-80"><a
+                    href={{itinerary?.qr_url}}><i class="fa-solid fa-download mr-2"></i>Download QR</a></button>
+    </div>
+    <div *ngFor="let day of itinerary?.days; let dayIndex = index" class="grid grid-cols-10 justify-center mt-8 border border-[#8C7D6B] rounded-md">
+        <p class="rounded-l-md col-span-2 md:col-span-1 flex justify-center items-center pt-8 pb-8 bg-[#FCF7F0] font-semibold text-[#D96942]">Day {{dayIndex+1}}</p>
+        <div class="flex flex-col col-span-8 md:col-span-9 gap-4 p-8">
+            <p *ngFor="let point of day" class="text-[#8C7D6B] flex flex-row gap-5">
+                <i class="fa-solid fa-plane text-[#D96942] mt-1"></i> <span>{{point}}</span>
+            </p>
+        </div>
+    </div>
+</div>

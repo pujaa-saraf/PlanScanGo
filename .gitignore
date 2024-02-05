@@ -1,0 +1,6 @@
+**/node_modules
+client/.angular/cache/
+client/.vscode/
+client/src/environments/environment*.ts
+**/db.sqlite3
+**/.DS_Store
